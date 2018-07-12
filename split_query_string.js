@@ -40,7 +40,6 @@ var SplitQueryString = function(queryString){
 
   return {
     toJson: function　() {
-      if　(isEmpty()) return null;
       return JSON.stringify(this.toObj());
     },
     toObj: function　() {
