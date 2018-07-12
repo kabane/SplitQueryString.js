@@ -1,10 +1,41 @@
-var SplitQueryString = (function(){
-  var queryString = location.search,
-      resultsObj,
+var SplitQueryString = (function(queryString){
+  var resultsObj,
       resultsArray;
   
   function isEmpty　() {
     return queryString.length <= 0;
+  }
+
+  function typeStrOf(val) {
+    return Object.prototype.toString.call(val)
+  }
+
+  function insertRsults (results) {
+    var countor, queries, i, query, key, val,;
+    if　(isEmpty()) return null;
+      
+    queries = queryString.slice(1).split('&');
+    countor = queries.length;
+    switch(typeStrOf(results)) {
+      case '[object Array]':
+        for(i = 0; i < countor; i++) {
+          query = queries[i].split('=');
+          results.push(query[1]);
+        }
+        break;
+      case '[object Object]':
+        for(i = 0; i < countor; i++) {
+          query = queries[i].split('=');
+          key = query[0];
+          val = query[1];
+          results[key] = val;
+        }
+        break;
+      default:
+        results = null;
+    }
+
+    return results
   }
 
   return {
@@ -17,36 +48,20 @@ var SplitQueryString = (function(){
       return JSON.stringify(this.toObj());
     },
     toObj: function　() {
-      var countor, queries, i, query, key, val, results = {};
-      
-      if　(isEmpty()) return null;
       if　(resultsObj) return resultsObj;
-      
-      queries = queryString.slice(1).split('&');
-      countor = queries.length;
-      for(i = 0; i < countor; i++) {
-        query = queries[i].split('=');
-        key = query[0];
-        val = query[1];
-        results[key] = val;
-      }
+      resultsObj = insertRsults({});
       
       return resultsObj = results;
     },
-    toArray: function() {
-      var countor, queries, i, query, results = [];
-      
-      if(isEmpty()) return null;
+    toArray: function() { 
       if(resultsArray) return resultsArray;
-      
-      queries = queryString.slice(1).split('&');
-      countor = queries.length;
-      for(i = 0; i < countor; i++) {
-        query = queries[i].split('=');
-        results.push(query[1]);
-      }
-      
+      resultsArray = insertRsults([]);
+
       return resultsArray = results;
     }
   }
 }());
+
+console.dir(SplitQueryString(location.search).toObj);
+console.dir(SplitQueryString(location.search).toArray);
+console.dir(SplitQueryString(location.search).toJson);
