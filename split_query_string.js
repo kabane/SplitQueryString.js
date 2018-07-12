@@ -1,4 +1,4 @@
-var SplitQueryString = (function(queryString){
+var SplitQueryString = function(queryString){
   var resultsObj,
       resultsArray;
   
@@ -11,7 +11,7 @@ var SplitQueryString = (function(queryString){
   }
 
   function insertRsults (results) {
-    var countor, queries, i, query, key, val,;
+    var countor, queries, i, query, key, val;
     if　(isEmpty()) return null;
       
     queries = queryString.slice(1).split('&');
@@ -39,10 +39,6 @@ var SplitQueryString = (function(queryString){
   }
 
   return {
-    num: function　() {
-      if　(isEmpty()) return 0;
-      return queryString.slice(1).split('&').length;
-    },
     toJson: function　() {
       if　(isEmpty()) return null;
       return JSON.stringify(this.toObj());
@@ -51,17 +47,13 @@ var SplitQueryString = (function(queryString){
       if　(resultsObj) return resultsObj;
       resultsObj = insertRsults({});
       
-      return resultsObj = results;
+      return resultsObj;
     },
     toArray: function() { 
       if(resultsArray) return resultsArray;
       resultsArray = insertRsults([]);
 
-      return resultsArray = results;
+      return resultsArray;
     }
   }
-}());
-
-console.dir(SplitQueryString(location.search).toObj);
-console.dir(SplitQueryString(location.search).toArray);
-console.dir(SplitQueryString(location.search).toJson);
+};
