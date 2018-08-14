@@ -1,6 +1,7 @@
 # SplitQueryStringJS
 
-ex. URI is http://example.com?hoge=aaa&fuge=bbb&piyo=cccc
+## Example
+URI is http://example.com?hoge=aaa&fuge=bbb&piyo=cccc
 
 ```
 SplitQueryString(location.search).toObj() // => {hoge: 'aaa', fuge: 'bbb', piyo: 'ccc'}
