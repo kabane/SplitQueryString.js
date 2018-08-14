@@ -1,4 +1,4 @@
-# SplitQueryString.js
+# SplitQueryStringJS
 
 ex. URI is http://example.com?hoge=aaa&fuge=bbb&piyo=cccc
 
